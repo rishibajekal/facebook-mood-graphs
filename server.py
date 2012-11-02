@@ -6,6 +6,7 @@ import tornado.web
 import pymongo
 from tornado.options import options, define
 from handlers.login import *
+from handlers.pages import *
 
 define("port", default=8888, help="run on the given port", type=int)
 define("debug", default=True, help="run tornado in debug mode", type=bool)
