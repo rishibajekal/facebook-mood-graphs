@@ -29,7 +29,7 @@ class Application(tornado.web.Application):
             conn = pymongo.connection.Connection()
             self.db = conn['sentipede']
         else:
-            conn = Connection(MONGOHQ_URL)
+            conn = pymongo.connection.Connection(MONGOHQ_URL)
             self.db = conn[urlparse(MONGO_URL).path[1:]]
 
         classifier_bin = open('static/resources/classifier.bin')
