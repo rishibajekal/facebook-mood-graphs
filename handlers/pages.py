@@ -1,4 +1,4 @@
-#from tornado.web import authenticated
+from tornado.web import authenticated
 from handlers.base import BaseHandler
 
 
@@ -12,5 +12,6 @@ class IndexHandler(BaseHandler):
 class DisplayHandler(BaseHandler):
     """Handler to render display page"""
 
+    @authenticated
     def get(self):
         self.render('display.html')

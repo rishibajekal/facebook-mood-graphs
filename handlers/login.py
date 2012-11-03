@@ -1,4 +1,5 @@
 import facebook
+import tornado.web
 from tornado.auth import FacebookGraphMixin
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
@@ -22,5 +23,8 @@ class FacebookLogin(BaseHandler, FacebookGraphMixin):
                                 extra_params={"scope": "read_stream,offline_access"})
 
     def _on_login(self, user):
-        print user
-        self.finish()
+        if not user:
+            raise tornado.web.HTTPError(500, "Google authentication failed. Please try again.")
+        self.set_secure_cookie("user", tornado.escape.json_encode(user))
+
+        self.redirect('/display')
