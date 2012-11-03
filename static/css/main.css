@@ -4,3 +4,9 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body{
+    background-image: url("../img/bg_big.png");
+    background-position: top;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}

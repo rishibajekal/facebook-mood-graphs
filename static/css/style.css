@@ -1,9 +1,3 @@
-.label{
-    font-family: 'Julius Sans One', sans-serif;
-    font-size: 120pt;
-    fill: rgb(100, 100, 100);
-}
-
 .axis text {
   font: 10px sans-serif;
   fill: rgb(100, 100, 100);
@@ -17,11 +11,10 @@
   shape-rendering: crispEdges;
 }
 
-body{
-    background-image: url("../img/bg_big.png");
-    background-position: top;
-    background-repeat:no-repeat;
-    background-attachment:fixed; 
+.label{
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 120pt;
+    fill: rgb(100, 100, 100);
 }
 
 .RdYlGn .q0-10{fill:rgb(165,0,38)}

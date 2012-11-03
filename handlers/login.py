@@ -1,9 +1,7 @@
-import facebook
 import tornado.web
 from tornado.auth import FacebookGraphMixin
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
-import simplejson as json
 
 
 class FacebookLogin(BaseHandler, FacebookGraphMixin):

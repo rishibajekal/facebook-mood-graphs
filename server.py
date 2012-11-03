@@ -5,8 +5,9 @@ import tornado.ioloop
 import tornado.web
 import pymongo
 from tornado.options import options, define
-from handlers.login import *
 from handlers.pages import *
+from handlers.login import *
+from handlers.api import *
 
 define("port", default=8888, help="run on the given port", type=int)
 define("debug", default=True, help="run tornado in debug mode", type=bool)
@@ -22,9 +23,12 @@ class Application(tornado.web.Application):
             # Page Handlers
             tornado.web.URLSpec(r'/', IndexHandler),
             tornado.web.URLSpec(r'/timeline', TimelineHandler),
+            tornado.web.URLSpec(r'/location', LocationHandler),
+            tornado.web.URLSpec(r'/likes', LikesHandler),
 
             # API Handlers
-            tornado.web.URLSpec(r'/login', FacebookLogin)
+            tornado.web.URLSpec(r'/api/status', FBStatusHandler),
+            tornado.web.URLSpec(r'/login', FacebookLogin),
         ]
 
         current_dir = os.path.dirname(__file__)
