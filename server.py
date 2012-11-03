@@ -12,13 +12,19 @@ from handlers.api import *
 
 define("port", default=8888, help="run on the given port", type=int)
 define("debug", default=True, help="run tornado in debug mode", type=bool)
+MONGOHQ_URL = "mongodb://heroku:9ac7baaa86707047fc32970d185a71fd@alex.mongohq.com:10003/app8933198"
+local = True
 
 
 class Application(tornado.web.Application):
     def __init__(self):
 
-        conn = pymongo.connection.Connection()
-        self.db = conn['sentipede']
+        if local:
+            conn = pymongo.connection.Connection()
+            self.db = conn['sentipede']
+        else:
+            conn = Connection(MONGOHQ_URL)
+            self.db = conn[urlparse(MONGO_URL).path[1:]]
 
         classifier_bin = open('static/resources/classifier.bin')
         self.classifier = pickle.load(classifier_bin)
