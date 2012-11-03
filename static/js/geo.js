@@ -15,9 +15,11 @@ $(document).ready(function() {
       var geo_lat = $.cookie('geo_lat');
       var geo_lng = $.cookie('geo_lng');
 
+      setInterval(function(){
       if(geo_lat===null && geo_lng===null)
       {
         window.location.replace('/');
       }
+     },500);
 
 });
