@@ -3,6 +3,7 @@ import tornado.web
 from tornado.auth import FacebookGraphMixin
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
+import simplejson as json
 
 
 class FacebookLogin(BaseHandler, FacebookGraphMixin):
@@ -27,7 +28,9 @@ class FacebookLogin(BaseHandler, FacebookGraphMixin):
             raise tornado.web.HTTPError(500, "Facebook authentication failed. Please try again.")
         self.set_secure_cookie("user", tornado.escape.json_encode(user))
         graph = facebook.GraphAPI(user["access_token"])
-        batched_requests = '[{"method":"GET","relative_url":"me"}, {"method":"GET","relative_url":"me/feed?limit=50"}]'
+        batched_requests = """[{"method":"GET","relative_url":"method/fql.query?query=select+message,time,place_id+from+status+where+uid=me()"}]"""
         feed = graph.request("", post_args={"batch": batched_requests})
-        print feed
+        f = open("feed.json", "w")
+        f.write(json.dumps(feed))
+        f.close()
         self.redirect('/display')
