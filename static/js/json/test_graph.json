@@ -1,0 +1,42 @@
+[
+    {
+        "name": "user1",
+        "size": 2,
+        "imports": ["like1", "like3"]
+    },
+    {
+        "name": "like1",
+        "size": 0
+    },
+    {
+        "name": "like3",
+        "size": 0
+    },
+    {
+        "name": "user2",
+        "size": 5,
+        "imports": ["like2", "like3"]
+    },
+    {
+        "name": "user3",
+        "size": 1,
+        "imports": ["like1", "like3", "like7"]
+    },
+    {
+        "name": "user4",
+        "size": 4,
+        "imports": ["like2"]
+    },
+    {
+        "name": "like2",
+        "size": 0
+    },
+    {
+        "name": "user0",
+        "size": 3
+    },
+    {
+        "name": "like7",
+        "size": 0
+    }
+]

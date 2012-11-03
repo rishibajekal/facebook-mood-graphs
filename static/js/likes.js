@@ -1,10 +1,56 @@
-/*
- *  Visualization for user-like graph
- */
 
+(function() {
+  packages = {
+
+    // Lazily construct the package hierarchy from class names.
+    root: function(classes) {
+      var map = {};
+
+      function find(name, data) {
+        var node = map[name], i;
+        if (!node) {
+          node = map[name] = data || {name: name, children: []};
+          if (name.length) {
+            node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+            node.parent.children.push(node);
+            node.key = name.substring(i + 1);
+          }
+        }
+        return node;
+      }
+
+      classes.forEach(function(d) {
+        find(d.name, d);
+      });
+
+      return map[""];
+    },
+
+    // Return a list of imports for the given array of nodes.
+    imports: function(nodes) {
+      var map = {},
+          imports = [];
+
+      // Compute a map from name to node.
+      nodes.forEach(function(d) {
+        map[d.name] = d;
+      });
+
+      // For each import, construct a link from the source to target node.
+      nodes.forEach(function(d) {
+        if (d.imports) d.imports.forEach(function(i) {
+          imports.push({source: map[d.name], target: map[i]});
+        });
+      });
+
+      return imports;
+    }
+
+  };
+})();
 
 var w = 1280,
-    h = 800,
+    h = 700,
     rx = w / 2,
     ry = h / 2,
     m0,
@@ -20,30 +66,25 @@ var bundle = d3.layout.bundle();
 
 var line = d3.svg.line.radial()
     .interpolate("bundle")
-    .tension(0.85)
+    .tension(.85)
     .radius(function(d) { return d.y; })
     .angle(function(d) { return d.x / 180 * Math.PI; });
 
 // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
-var div = d3.select("body").insert("div", "h2")
-    .style("top", "-80px")
-    .style("left", "-160px")
-    .style("width", w + "px")
-    .style("height", w + "px")
-    .style("position", "absolute");
+var div = d3.select("#graph-box");
 
 var svg = div.append("svg:svg")
     .attr("width", w)
-    .attr("height", w)
+    .attr("height", h)
   .append("svg:g")
     .attr("transform", "translate(" + rx + "," + ry + ")");
 
 svg.append("svg:path")
     .attr("class", "arc")
-    .attr("d", d3.svg.arc().outerRadius(ry - 120).innerRadius(0).startAngle(0).endAngle(2 * Math.PI))
-    .on("mousedown", mousedown);
+    .attr("d", d3.svg.arc().outerRadius(ry - 120).innerRadius(0).startAngle(0).endAngle(2 * Math.PI));
+    //.on("mousedown", mousedown);
 
-d3.json("flare-imports.json", function(classes) {
+d3.json("./static/js/json/test_graph.json", function(classes) {
   var nodes = cluster.nodes(packages.root(classes)),
       links = packages.imports(nodes),
       splines = bundle(links);
@@ -58,6 +99,22 @@ d3.json("flare-imports.json", function(classes) {
       .data(nodes.filter(function(n) { return !n.children; }))
     .enter().append("svg:g")
       .attr("class", "node")
+      .attr("fill", function(d){
+            switch(d.size)
+            {
+                case 0: return "blue";
+                case 1 :
+                    return "rgb(243,108,79)";
+                case 2 :
+                    return "rgb(251,176,94)";
+                case 3 :
+                    return "rgb(226,229,119)";
+                case 4 :
+                    return "rgb(192,221,106)";
+                case 5 :
+                    return "rgb(145,201,70)";
+            }
+        })
       .attr("id", function(d) { return "node-" + d.key; })
       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .append("svg:text")
@@ -151,3 +208,4 @@ function cross(a, b) {
 function dot(a, b) {
   return a[0] * b[0] + a[1] * b[1];
 }
+

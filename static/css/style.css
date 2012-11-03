@@ -39,6 +39,13 @@
 .RdYlGn .q8-10{fill:rgb(26,152,80)}
 .RdYlGn .q9-10{fill:rgb(0,104,55)}
 
+#graph-box{
+  position:relative;
+  left: 100px;
+  top: 50px;
+  height: 700px;
+}
+
 
  path.arc {
   cursor: move;
