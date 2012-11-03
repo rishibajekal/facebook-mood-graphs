@@ -38,6 +38,7 @@ class CreateHandler(BaseHandler):
         for status in statuses_json:
             new_status = {}
 
+            new_status['status'] = status['message']
             status_date = datetime.datetime.fromtimestamp(int(status['time']))
             new_status['month'] = status_date.strftime("%B")
             status_date = status_date.isocalendar()
@@ -50,6 +51,7 @@ class CreateHandler(BaseHandler):
 
             avg_sentiment += status['sentiment']
             num_statuses += 1
+            print new_status
 
         # Calculate average sentiment
         avg_sentiment /= num_statuses
