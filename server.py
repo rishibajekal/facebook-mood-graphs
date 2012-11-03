@@ -30,7 +30,7 @@ class Application(tornado.web.Application):
             self.db = conn['sentipede']
         else:
             conn = pymongo.connection.Connection(MONGOHQ_URL)
-            self.db = conn[urlparse(MONGO_URL).path[1:]]
+            self.db = conn[urlparse(MONGOHQ_URL).path[1:]]
 
         classifier_bin = open('static/resources/classifier.bin')
         self.classifier = pickle.load(classifier_bin)
