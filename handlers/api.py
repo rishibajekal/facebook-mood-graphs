@@ -7,7 +7,18 @@ import handlers.sentiment as sentiment
 import simplejson as json
 
 
-class FBStatusHandler(BaseHandler):
+class MapHandler(BaseHandler):
+
+    @asynchronous
+    def get(self):
+
+        db_map = self.application.db['map']
+        results = db_map.find({})
+        for entry in results:
+            print entry
+
+
+class CreateHandler(BaseHandler):
 
     @asynchronous
     def get(self):
@@ -42,23 +53,23 @@ class FBStatusHandler(BaseHandler):
 
         # Calculate average sentiment
         avg_sentiment /= num_statuses
-
+        # user_id # avg_sentiment # lat # lng
         # TODO:
-        # if person exists in mongo:
-        #   pass
-        # else:
-        #   do following and add info to mongo
-
-        # Get location for user
-        ip_addr = self.request.remote_ip
-        if ip_addr is not None:
-            ip_addr = '192.17.253.25'  # we will remove this before pushing it to production
-            gi = pygeoip.GeoIP('static/resources/GeoLiteCity.dat', pygeoip.MEMORY_CACHE)
-            address = gi.record_by_addr(ip_addr)
-            lat = address['latitude']
-            lng = address['longitude']
-            # change the format of the lng lat to suharsh format and then push it to mongo
-
+        db_map = self.application.db['map']
+        user_id = user['id']
+        results = db_map.find_one({'_id': user_id})
+        if results is None:
+            # Get location for user
+            lat = None
+            lng = None
+            ip_addr = self.request.remote_ip
+            if ip_addr is not None:
+                ip_addr = '192.17.253.25'  # we will remove this before pushing it to production
+                gi = pygeoip.GeoIP('static/resources/GeoLiteCity.dat', pygeoip.MEMORY_CACHE)
+                address = gi.record_by_addr(ip_addr)
+                lat = address['latitude']
+                lng = address['longitude']
+            db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment, 'lat': lat, 'lng': lng})
         print json.dumps(min_statuses)
         self.write(json.dumps(min_statuses))
         self.finish()

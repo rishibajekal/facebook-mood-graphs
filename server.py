@@ -17,8 +17,8 @@ define("debug", default=True, help="run tornado in debug mode", type=bool)
 class Application(tornado.web.Application):
     def __init__(self):
 
-        # conn = pymongo.connection.Connection()
-        # self.db = conn['NAME OF DB']
+        conn = pymongo.connection.Connection()
+        self.db = conn['sentipede']
 
         classifier_bin = open('static/resources/classifier.bin')
         self.classifier = pickle.load(classifier_bin)
@@ -31,7 +31,8 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/likes', LikesHandler),
 
             # API Handlers
-            tornado.web.URLSpec(r'/api/timeline', FBStatusHandler),
+            tornado.web.URLSpec(r'/api/create', CreateHandler),
+            tornado.web.URLSpec(r'/api/map', MapHandler),
             tornado.web.URLSpec(r'/login', FacebookLogin),
         ]
 
