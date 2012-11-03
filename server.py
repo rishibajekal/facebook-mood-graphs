@@ -42,6 +42,7 @@ class Application(tornado.web.Application):
             cookie_secret='074cff43374c4c9d4e4136f884baccbe',
             facebook_api_key='417364814995960',
             facebook_secret='271a6b543e1ad1c410dc4e6bf8ccd430',
+            google_api_key='AIzaSyCJbY1fY627epIevgIrg_XLViV5VpSOHOw',
         )
 
         super(Application, self).__init__(handlers, **settings)
