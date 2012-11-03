@@ -24,7 +24,10 @@ class FacebookLogin(BaseHandler, FacebookGraphMixin):
 
     def _on_login(self, user):
         if not user:
-            raise tornado.web.HTTPError(500, "Google authentication failed. Please try again.")
+            raise tornado.web.HTTPError(500, "Facebook authentication failed. Please try again.")
         self.set_secure_cookie("user", tornado.escape.json_encode(user))
-
+        graph = facebook.GraphAPI(user["access_token"])
+        batched_requests = '[{"method":"GET","relative_url":"me"}, {"method":"GET","relative_url":"me/feed?limit=50"}]'
+        feed = graph.request("", post_args={"batch": batched_requests})
+        print feed
         self.redirect('/display')
