@@ -21,7 +21,7 @@ class Application(tornado.web.Application):
         handlers = [
             # Page Handlers
             tornado.web.URLSpec(r'/', IndexHandler),
-            tornado.web.URLSpec(r'/display', DisplayHandler),
+            tornado.web.URLSpec(r'/timeline', TimelineHandler),
 
             # API Handlers
             tornado.web.URLSpec(r'/login', FacebookLogin)

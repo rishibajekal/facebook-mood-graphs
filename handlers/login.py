@@ -33,4 +33,4 @@ class FacebookLogin(BaseHandler, FacebookGraphMixin):
         f = open("feed.json", "w")
         f.write(json.dumps(feed))
         f.close()
-        self.redirect('/display')
+        self.redirect('/timeline')

@@ -61,7 +61,10 @@ $(document).ready(function(){
         .attr("class", "label")
         .attr("x", 100)
         .attr("y", function(d, i){return y(i* interval + 10) - data.length*0.484;})
-        .text(function(d){return d.week;});
+        .attr("opacity", 0)
+        .text(function(d){return d.week;})
+        .transition().duration(2000)
+        .attr("opacity", 1);
 
     function colorPicker(d){
         var val = Math.floor((d.sentiment + 1) * 5);

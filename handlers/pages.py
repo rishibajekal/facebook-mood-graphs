@@ -9,9 +9,9 @@ class IndexHandler(BaseHandler):
         self.render('index.html')
 
 
-class DisplayHandler(BaseHandler):
-    """Handler to render display page"""
+class TimelineHandler(BaseHandler):
+    """Handler to render timeline page"""
 
     @authenticated
     def get(self):
-        self.render('display.html')
+        self.render('timeline.html')
