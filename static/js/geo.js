@@ -20,6 +20,6 @@ $(document).ready(function() {
       {
         window.location.replace('/');
       }
-     },500);
+     },5000);
 
 });
