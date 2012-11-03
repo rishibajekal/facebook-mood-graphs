@@ -1,3 +1,14 @@
+.label{
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 120pt;
+    color: rgb(100, 100, 100);
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    z-index: 10;
+    background: none;
+}
+
 .axis text {
   font: 10px sans-serif;
   fill: rgb(100, 100, 100);

@@ -18,7 +18,8 @@ $(document).ready(function(){
 
     var margin = {top: 30, right: 10, bottom: 10, left: 50},
         width = 1200 - margin.left - margin.right,
-        height = (data.length * 15) - margin.top - margin.bottom;
+        interval = 15,
+        height = (data.length * interval) - margin.top - margin.bottom;
 
     function getSentiment(data){
         return data.sentiment;
@@ -35,8 +36,6 @@ $(document).ready(function(){
         .domain(d3.range(data.length))
         .rangeRoundBands([0, height], 0.05);
 
-    console.log(d3.range(data.length));
-
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("top");
@@ -47,15 +46,15 @@ $(document).ready(function(){
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var sparse_data = [];
+    /*var sparse_data = [];
     var interval = 50;
     for (var i = 0; i < data.length; i++){
         if (i % interval === 0){
             sparse_data.push(data[i]);
         }
-    }
+    }*/
 
-    svg.selectAll(".label")
+    /*svg.selectAll(".label")
         .data(sparse_data)
     .enter().append("text")
         .attr("class", "label")
@@ -64,7 +63,21 @@ $(document).ready(function(){
         .attr("opacity", 0)
         .text(function(d){return d.week;})
         .transition().duration(2000)
-        .attr("opacity", 1);
+        .attr("opacity", 1);*/
+
+    /*var zero_arr = [];
+    zero_arr.push(data[0]);
+
+   svg.selectAll(".label")
+        .data(zero_arr)
+    .enter().append("text")
+        .attr("class", "label")
+        .attr("x", 100)
+        .attr("y", function(d, i){return y(i + 10) - data.length*0.484;})
+        .attr("opacity", 0)
+        .text(function(d){return d.week;})
+        .transition().duration(2000)
+        .attr("opacity", 1);*/
 
     function colorPicker(d){
         var val = Math.floor((d.sentiment + 1) * 5);
@@ -95,7 +108,7 @@ $(document).ready(function(){
         .attr("fill", colorPicker)
         .attr("stroke", colorPicker)
         .attr("stroke-width", 1)
-        .attr("opacity", 0.8)
+        .attr("opacity", 0.9)
         .attr("x", function(d) { return x(Math.min(0, d.sentiment)); })
         .attr("y", function(d, i) { return y(i) - data.length*0.484; })
         .attr("width", function(d) { return Math.abs(x(d.sentiment) - x(0)); })
@@ -105,7 +118,21 @@ $(document).ready(function(){
         .attr("class", "x axis")
         .call(xAxis);
 
-    console.log("line 62");
+
+
+
+    $(window).scroll(function(){
+        var svg_y = window.pageYOffset;
+        if (svg_y > 0){
+            var week_num = svg_y/interval;
+            week_num = Math.ceil(week_num);
+            console.log("week_num", week_num);
+
+            console.log(data[week_num].week);
+            $("#date").children().remove();
+            $("#date").append("<p>" + String(data[week_num].week) + "</p>");
+        }
+    });
 
     /*svg.append("g")
         .attr("class", "y axis")
