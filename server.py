@@ -25,13 +25,13 @@ class Application(tornado.web.Application):
 
         handlers = [
             # Page Handlers
-            tornado.web.URLSpec(r'/', IndexHandler),
-            tornado.web.URLSpec(r'/timeline', TimelineHandler),
-            tornado.web.URLSpec(r'/location', LocationHandler),
-            tornado.web.URLSpec(r'/likes', LikesHandler),
+            tornado.web.URLSpec(r'/', IndexPageHandler),
+            tornado.web.URLSpec(r'/timeline', TimelinePageHandler),
+            tornado.web.URLSpec(r'/location', LocationPageHandler),
+            tornado.web.URLSpec(r'/likes', LikesPageHandler),
 
             # API Handlers
-            tornado.web.URLSpec(r'/api/create', CreateHandler),
+            tornado.web.URLSpec(r'/api/timeline', TimelineHandler),
             tornado.web.URLSpec(r'/api/map', MapHandler),
             tornado.web.URLSpec(r'/login', FacebookLogin),
         ]

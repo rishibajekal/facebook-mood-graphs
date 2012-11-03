@@ -2,14 +2,14 @@ from tornado.web import authenticated
 from handlers.base import BaseHandler
 
 
-class IndexHandler(BaseHandler):
+class IndexPageHandler(BaseHandler):
     """Handler to render index page"""
 
     def get(self):
         self.render('index.html')
 
 
-class TimelineHandler(BaseHandler):
+class TimelinePageHandler(BaseHandler):
     """Handler to render timeline page"""
 
     @authenticated
@@ -17,14 +17,14 @@ class TimelineHandler(BaseHandler):
         self.render('timeline.html')
 
 
-class LocationHandler(BaseHandler):
+class LocationPageHandler(BaseHandler):
     """Handler to render index page"""
 
     def get(self):
         self.render('location.html')
 
 
-class LikesHandler(BaseHandler):
+class LikesPageHandler(BaseHandler):
     """Handler to render index page"""
 
     def get(self):
