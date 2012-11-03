@@ -7,9 +7,9 @@
 
 {% block navbar %}
     <ul class="nav">
-        <li class="active"><a href="/timeline">timeline</a></li>
+        <li><a href="/timeline">timeline</a></li>
         <li><a href="/location">location</a></li>
-        <li><a href="/likes">likes</a></li>
+        <li class="likes"><a href="/likes">likes</a></li>
     </ul>
 {% end %}
 
@@ -21,4 +21,3 @@
     <script src="http://mbostock.github.com/d3/d3.v2.js?2.8.1"></script>
     <script src="{{ static_url("js/vis.js") }}"></script>
 {% end %}
-        

@@ -15,3 +15,17 @@ class TimelineHandler(BaseHandler):
     @authenticated
     def get(self):
         self.render('timeline.html')
+
+
+class LocationHandler(BaseHandler):
+    """Handler to render index page"""
+
+    def get(self):
+        self.render('location.html')
+
+
+class LikesHandler(BaseHandler):
+    """Handler to render index page"""
+
+    def get(self):
+        self.render('likes.html')
