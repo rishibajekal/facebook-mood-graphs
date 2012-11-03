@@ -49,6 +49,9 @@ class MapHandler(BaseHandler):
         for entry in results:
             push_entry = {}
             push_entry["type"] = "Feature"
-            push_entry["geometry"] = """{"type": "Point", "coordinates": [%f, %f]}""" % (entry["lng"], entry["lat"])
-            push_entry["properties"] = """{"avg_sentiment": "%f"}""" % (entry["avg_sentiment"])
+            push_entry["geometry"] = {"type": "Point", "coordinates": [entry['lng'], entry['lat']]}
+            push_entry["properties"] = {"sentiment": entry['avg_sentiment']}
             features.append(push_entry)
+        retval = {"type": "FeatureCollection", "features": features}
+        self.write(json.dumps(retval))
+        self.finish()
