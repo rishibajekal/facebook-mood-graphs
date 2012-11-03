@@ -1,3 +1,4 @@
+import facebook
 from tornado.auth import FacebookGraphMixin
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
