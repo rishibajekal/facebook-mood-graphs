@@ -1,4 +1,5 @@
 import os
+import pickle
 import logging
 import tornado.httpserver
 import tornado.ioloop
@@ -19,6 +20,9 @@ class Application(tornado.web.Application):
         # conn = pymongo.connection.Connection()
         # self.db = conn['NAME OF DB']
 
+        classifier_bin = open('static/resources/classifier.bin')
+        self.classifier = pickle.load(classifier_bin)
+
         handlers = [
             # Page Handlers
             tornado.web.URLSpec(r'/', IndexHandler),
@@ -27,7 +31,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/likes', LikesHandler),
 
             # API Handlers
-            tornado.web.URLSpec(r'/api/status', FBStatusHandler),
+            tornado.web.URLSpec(r'/api/timeline', FBStatusHandler),
             tornado.web.URLSpec(r'/login', FacebookLogin),
         ]
 
