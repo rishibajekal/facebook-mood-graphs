@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
+{% block head %}
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+{% end %}
+
 {% block navbar %}
 
 {% end %}
 
 {% block content %}
-    <div class="hero-unit">
-        <h1>On the display page.</h1>
-    </div>
+    <div id="graph-box"></div>
 {% end %}
 
 {% block scripts %}
     <script src="{{ static_url("js/vis.js") }}"></script>
 {% end %}
+        
