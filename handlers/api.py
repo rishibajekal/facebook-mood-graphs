@@ -27,7 +27,9 @@ class FBStatusHandler(BaseHandler):
         for status in statuses_json:
             new_status = {}
 
-            status_date = datetime.datetime.fromtimestamp(int(status['time'])).isocalendar()
+            status_date = datetime.datetime.fromtimestamp(int(status['time']))
+            new_status['month'] = status_date.month
+            status_date = status_date.isocalendar()
             new_status['year'] = status_date[0]
             new_status['week'] = status_date[1]
             new_status['day'] = status_date[2]
