@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block navbar %}
+    {% if current_user %}
+        {% include "nav-logged-in.html" %}
+    {% else %}
+        {% include "nav-logged-out.html" %}
+    {% end %}
 {% end %}
 
 {% block content %}

@@ -35,6 +35,12 @@
 
                     {% block navbar %}{% end %}
 
+                    {% if current_user %}
+                        <div class="nav pull-right">
+                            <li><a class="btn btn-small" href="/logout">logout</a></li>
+                        </div>
+                    {% end %}
+
                 </div><!--/.nav-collapse -->
             </div>
         </div>

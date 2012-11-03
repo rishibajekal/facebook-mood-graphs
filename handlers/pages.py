@@ -20,6 +20,7 @@ class TimelinePageHandler(BaseHandler):
 class LocationPageHandler(BaseHandler):
     """Handler to render index page"""
 
+    @authenticated
     def get(self):
         self.render('location.html')
 
@@ -27,5 +28,6 @@ class LocationPageHandler(BaseHandler):
 class LikesPageHandler(BaseHandler):
     """Handler to render index page"""
 
+    @authenticated
     def get(self):
         self.render('likes.html')

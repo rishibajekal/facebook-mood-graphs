@@ -7,7 +7,14 @@ from handlers.base import BaseHandler
 import handlers.sentiment as sentiment
 
 
-class FacebookLogin(BaseHandler, FacebookGraphMixin):
+class LogoutHandler(BaseHandler):
+    @asynchronous
+    def get(self):
+        self.clear_cookie("user")
+        self.redirect('/')
+
+
+class LoginHandler(BaseHandler, FacebookGraphMixin):
 
     @asynchronous
     def get(self):
@@ -35,7 +42,6 @@ class FacebookLogin(BaseHandler, FacebookGraphMixin):
         db_map = self.application.db['map']
 
         results = db_map.find_one({'_id': user['id']})
-        print results
 
         if results is None:
             # Get statuses from user from Facebook

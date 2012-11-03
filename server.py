@@ -7,7 +7,7 @@ import tornado.web
 import pymongo
 from tornado.options import options, define
 from handlers.pages import *
-from handlers.login import *
+from handlers.auth import *
 from handlers.api import *
 
 define("port", default=8888, help="run on the given port", type=int)
@@ -33,7 +33,8 @@ class Application(tornado.web.Application):
             # API Handlers
             tornado.web.URLSpec(r'/api/timeline', TimelineHandler),
             tornado.web.URLSpec(r'/api/map', MapHandler),
-            tornado.web.URLSpec(r'/login', FacebookLogin),
+            tornado.web.URLSpec(r'/login', LoginHandler),
+            tornado.web.URLSpec(r'/logout', LogoutHandler),
         ]
 
         current_dir = os.path.dirname(__file__)
