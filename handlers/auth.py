@@ -67,7 +67,7 @@ class LoginHandler(BaseHandler, FacebookGraphMixin):
             lng = None
             ip_addr = self.request.remote_ip
             if ip_addr is not None:
-                ip_addr = '192.17.253.25'  # we will remove this before pushing it to production
+                #ip_addr = '192.17.253.25'  # we will remove this before pushing it to production
                 gi = pygeoip.GeoIP('static/resources/GeoLiteCity.dat', pygeoip.MEMORY_CACHE)
                 address = gi.record_by_addr(ip_addr)
                 lat = address['latitude']

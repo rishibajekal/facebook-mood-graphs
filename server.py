@@ -5,21 +5,26 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import pymongo
+import sys
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
 from handlers.api import *
 
-define("port", default=8888, help="run on the given port", type=int)
+PORT = sys.argv[1]
+
+LOCAL = True if (sys.argv[2] == '1') else False
+
+define("port", default=PORT, help="run on the given port", type=int)
+define("local", default=LOCAL, help="run on the given port", type=bool)
 define("debug", default=True, help="run tornado in debug mode", type=bool)
 MONGOHQ_URL = "mongodb://heroku:9ac7baaa86707047fc32970d185a71fd@alex.mongohq.com:10003/app8933198"
-local = True
 
 
 class Application(tornado.web.Application):
     def __init__(self):
 
-        if local:
+        if LOCAL:
             conn = pymongo.connection.Connection()
             self.db = conn['sentipede']
         else:
