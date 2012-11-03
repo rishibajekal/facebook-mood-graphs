@@ -6,6 +6,7 @@ import tornado.ioloop
 import tornado.web
 import pymongo
 import sys
+from urlparse import urlparse
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
