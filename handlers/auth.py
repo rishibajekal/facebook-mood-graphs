@@ -72,4 +72,6 @@ class LoginHandler(BaseHandler, FacebookGraphMixin):
                 address = gi.record_by_addr(ip_addr)
                 lat = address['latitude']
                 lng = address['longitude']
-            db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment, 'lat': lat, 'lng': lng})
+                db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment, 'lat': lat, 'lng': lng})
+            else:
+                db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment})
