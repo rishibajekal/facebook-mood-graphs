@@ -4890,7 +4890,7 @@ hr {
 }
 .navbar .brand {
   padding: 12px 20px 8px;
-  font-family: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
   font-weight: bold;
 }
 .navbar .brand:hover {
@@ -4898,7 +4898,7 @@ hr {
 }
 .navbar .nav > li > a {
   padding: 13px 15px 6px;
-  font-family: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
   font-weight: bold;
   text-shadow: none;
 }
@@ -4912,7 +4912,7 @@ hr {
 .navbar .navbar-text {
   padding: 13px 15px 7px;
   line-height: 19px;
-  font-family: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
   color: #999999;
 }
 .navbar .divider-vertical {
@@ -4926,7 +4926,7 @@ hr {
   margin-bottom: 5px;
 }
 .navbar .dropdown-menu a {
-  font-family: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
 }
 .navbar-inverse .navbar-inner {
   -webkit-box-shadow: none;

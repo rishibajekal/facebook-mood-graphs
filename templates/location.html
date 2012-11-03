@@ -11,12 +11,15 @@
         <li class="active"><a href="/location">location</a></li>
         <li><a href="/likes">likes</a></li>
     </ul>
+    <ul class="nav pull-right">
+        <li><a class="reset" href="#" id="reset">reset</a></li>
+    </ul>
 {% end %}
 
 {% block content %}
-    <div style= "padding: 60px" id="graph-box"></div>
+    <div style= "padding: 70px" id="map-box"></div>
 {% end %}
 
 {% block scripts %}
-
+ <script src="{{ static_url("js/map.js") }}"></script>
 {% end %}
