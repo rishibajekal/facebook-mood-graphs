@@ -14,10 +14,12 @@
 
 {% block content %}
     <div style= "padding: 60px" id="graph-box"></div>
-    <h3 class="label" id="date"></h3>
+    <h3 style="position:fixed; width: 200px; height:150px; right:100px; top:100px;" id="status-box"></h3>
+    <!--<h3 class="label" id="date"></h3>-->
 {% end %}
 
 {% block scripts %}
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
     <script src="{{ static_url("js/vis.js") }}"></script>
 {% end %}
         
