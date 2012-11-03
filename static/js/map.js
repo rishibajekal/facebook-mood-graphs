@@ -121,66 +121,16 @@ function draw() {
 
 draw(); //perform the initial draw
 
-function plot() {
-    var statuses = {
-        type: "FeatureCollection",
-        features: [
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [124, -54]
-                },
-                properties: {sentiment: -0.4}
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [-100, 59]
-                },
-                properties: {sentiment: 0.8}
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [0, 9]
-                },
-                properties: {sentiment: 1}
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [-183, 89]
-                },
-                properties: {sentiment: 0.2}
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [134, -54]
-                },
-                properties: {sentiment: -0.7}
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: [144, 80]
-                },
-                properties: {sentiment: 0.4}
-            }
-        ]
-    };
+function plot(data) {
+    var features = data.features;
 
     circles.selectAll("circle")
         .remove();
 
+    console.log(features);
+
     circles.selectAll("circle")
-        .data(statuses.features)
+        .data(features)
         .enter().append("svg:circle")
         .attr("cx", width/2)
         .attr("cy", height/2)
@@ -193,6 +143,8 @@ function plot() {
         .attr("stroke", colorPicker)
         .attr("fill", colorPicker);
 }
+
+$.getJSON("/api/map", plot);
 
 plot(); //perform the plot of the data
 
