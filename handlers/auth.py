@@ -20,14 +20,14 @@ class LoginHandler(BaseHandler, FacebookGraphMixin):
     def get(self):
         if self.get_argument("code", False):
             self.get_authenticated_user(
-                redirect_uri='http://localhost:8888/login',
+                redirect_uri='http://sentipede.herokuapp.com/login',
                 client_id=self.application.settings["facebook_api_key"],
                 client_secret=self.application.settings["facebook_secret"],
                 code=self.get_argument("code"),
                 callback=self.async_callback(self._on_login)
             )
             return
-        self.authorize_redirect(redirect_uri='http://localhost:8888/login',
+        self.authorize_redirect(redirect_uri='http://sentipede.herokuapp.com/login',
                                 client_id=self.settings["facebook_api_key"],
                                 extra_params={"scope": "read_stream,offline_access"})
 
