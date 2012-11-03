@@ -4,10 +4,10 @@ import pickle
 import json
 
 def sentiment(sentence, classifier):
-    sent_dict = defaultdict(bool)
+    sent_dict = defaultdict(int)
     words = sentence.split(' ')
     for word in words:
-        sent_dict[word.lower()] = True
+        sent_dict[word.lower()] = sent_dict[word.lower()] + 1
     return (classifier.classify(sent_dict) - 2.5) / 2.5
 
 def sentimentJSON(sentences_json, classifier):
