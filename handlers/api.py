@@ -28,7 +28,7 @@ class FBStatusHandler(BaseHandler):
             new_status = {}
 
             status_date = datetime.datetime.fromtimestamp(int(status['time']))
-            new_status['month'] = status_date.month
+            new_status['month'] = status_date.strftime("%B")
             status_date = status_date.isocalendar()
             new_status['year'] = status_date[0]
             new_status['week'] = status_date[1]
