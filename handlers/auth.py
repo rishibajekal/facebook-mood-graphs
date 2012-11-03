@@ -1,6 +1,5 @@
 import facebook
 import tornado.web
-import pygeoip
 from tornado.auth import FacebookGraphMixin
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
@@ -63,15 +62,9 @@ class LoginHandler(BaseHandler, FacebookGraphMixin):
 
             # Get location for user
             user_id = user['id']
-            lat = None
-            lng = None
-            ip_addr = self.request.remote_ip
-            if ip_addr is not None:
-                #ip_addr = '192.17.253.25'  # we will remove this before pushing it to production
-                gi = pygeoip.GeoIP('static/resources/GeoLiteCity.dat', pygeoip.MEMORY_CACHE)
-                address = gi.record_by_addr(ip_addr)
-                lat = address['latitude']
-                lng = address['longitude']
-                db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment, 'lat': lat, 'lng': lng})
+            geo_lng = float(self.get_cookie("geo_lng"))
+            geo_lat = float(self.get_cookie("geo_lat"))
+            if geo_lng is not None and geo_lat is not None:
+                db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment, 'lat': geo_lat, 'lng': geo_lng})
             else:
                 db_map.insert({'_id': user_id, 'avg_sentiment': avg_sentiment})

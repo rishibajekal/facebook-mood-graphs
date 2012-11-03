@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <script src="../static/js/vendor/jquery.cookie.js"></script>
+  <script src="../static/js/geo.js"></script>
+{% end %}
+
 {% block navbar %}
     {% if current_user %}
         {% include "nav-logged-in.html" %}
@@ -21,7 +26,4 @@
     </div>
   </div>
 </div>
-{% end %}
-
-{% block scripts %}
 {% end %}
