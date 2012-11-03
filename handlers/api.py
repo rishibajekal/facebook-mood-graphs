@@ -45,5 +45,10 @@ class MapHandler(BaseHandler):
     def get(self):
         db_map = self.application.db['map']
         results = db_map.find({})
+        features = []
         for entry in results:
-            print entry
+            push_entry = {}
+            push_entry["type"] = "Feature"
+            push_entry["geometry"] = """{"type": "Point", "coordinates": [%f, %f]}""" % (entry["lng"], entry["lat"])
+            push_entry["properties"] = """{"avg_sentiment": "%f"}""" % (entry["avg_sentiment"])
+            features.append(push_entry)
