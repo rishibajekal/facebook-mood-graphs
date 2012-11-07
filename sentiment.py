@@ -50,25 +50,3 @@ def sentimentJSON(sentences_json, classifier):
         sentence_dict['sentiment'] = sentiment(sentence_dict['message'], classifier)
     return sentences
 
-def classifierTest():
-    f = open('classifier.bin')
-    classifier = pickle.load(f)
-    f.close()
-
-    f = open('rishi_statuses.json')
-    j = f.read()
-    f.close()
-
-    
-    print sentiment("had a blast at the game. Awesome game and great public warmup. On to studying...", classifier)
-
-    d = sentimentJSON(j, classifier)
-    
-    for ent in d:
-        try:
-            print 'Message: ' + ent['message'] + ' Sentiment: ' + str(ent['sentiment'])
-        except:
-            pass
-
-if __name__ == "__main__":
-    classifierTest()
