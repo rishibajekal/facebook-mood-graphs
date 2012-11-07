@@ -31,3 +31,10 @@ class LikesPageHandler(BaseHandler):
     @authenticated
     def get(self):
         self.render('likes.html')
+
+
+class GoogleSeoHandler():
+    """Handler for Google SEO"""
+
+    def get(self):
+        self.render('googleseo.html')

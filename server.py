@@ -41,6 +41,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/timeline', TimelinePageHandler),
             tornado.web.URLSpec(r'/location', LocationPageHandler),
             tornado.web.URLSpec(r'/likes', LikesPageHandler),
+            tornado.web.URLSpec(r'/googleded5c8274801e643.html', GoogleSeoHandler),
 
             # API Handlers
             tornado.web.URLSpec(r'/api/timeline', TimelineHandler),
