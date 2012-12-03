@@ -2,7 +2,8 @@ from nltk.classify import NaiveBayesClassifier
 from collections import defaultdict
 import pickle
 import json
-import re
+import re, itertools
+from nltk.corpus import wordnet as wn
 
 clean = r'\w+'
 
@@ -20,6 +21,11 @@ STOPWORDS = set(['a','able','about','across','after','all','almost','also','am',
              'whom','why','will','with','would','yet','you','your'])
 
 
+GOOD_SYNSETS = wn.synsets('good')
+BAD_SYNSETS = wn.synsets('bad')
+BASE_SYN = 0.8
+
+
 def getWords(sent):
     outList = []
     for a in sent.split(' '):
@@ -32,10 +38,11 @@ def getWords(sent):
 def sentiment(sentence, classifier):
     sent_dict = defaultdict(int)
     words = getWords(sentence)
+    coeff_cache = defaultdict(float)
     for word in words:
         if (word not in STOPWORDS) and word != '':
             sent_dict[word.lower()] = sent_dict[word.lower()] + 1
-    return (classifier.classify(sent_dict) - 2.5) / 2.5
+    return (((classifier.classify(sent_dict) - 1) / 4) * 2) - 1
 
 def sentimentJSON(sentences_json, classifier):
     sentences = json.loads(sentences_json)
@@ -43,25 +50,3 @@ def sentimentJSON(sentences_json, classifier):
         sentence_dict['sentiment'] = sentiment(sentence_dict['message'], classifier)
     return sentences
 
-def classifierTest():
-    f = open('classifier.bin')
-    classifier = pickle.load(f)
-    f.close()
-
-    f = open('rishi_statuses.json')
-    j = f.read()
-    f.close()
-
-    
-    print sentiment("had a blast at the game. Awesome game and great public warmup. On to studying...", classifier)
-
-    d = sentimentJSON(j, classifier)
-    
-    for ent in d:
-        try:
-            print 'Message: ' + ent['message'] + ' Sentiment: ' + str(ent['sentiment'])
-        except:
-            pass
-
-if __name__ == "__main__":
-    classifierTest()
